@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">conspects</string>
+    <string name="alg">алгебра</string>
+    <string name="geo">геометрія</string>
+</resources>
