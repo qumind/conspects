@@ -20,9 +20,9 @@
                     android:minHeight="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
                     app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
-                <fragment
+                <FrameLayout
                     android:name="com.example.oleg.conspects.ChooseFragment"
-                    android:id="@+id/choose_fragment"
+                    android:id="@+id/fragment_frame"
                     android:layout_height="match_parent"
                     android:layout_width="match_parent"/>
         </LinearLayout>
