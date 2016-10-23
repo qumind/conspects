@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_algebra_fragment"
+            android:title="algebra"/>
+        <item
+            android:id="@+id/nav_geometry_fragment"
+            android:title="geometry"/>
+    </group>
+<item android:title="Додатково">
+    <menu>
+        <group android:checkableBehavior="single">
+            <item
+                android:id="@+id/about_developers"
+                android:title="dev"/>
+            <item
+                android:id="@+id/yakato_fignya"
+                android:title="yakato_fignya"/>
+        </group>>
+    </menu>>
+</item>
+</menu>
