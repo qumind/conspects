@@ -1,11 +1,13 @@
 package com.example.oleg.conspects;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -46,21 +48,13 @@ public class MainActivity extends AppCompatActivity {
         //finding elements
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (android.support.design.widget.NavigationView) findViewById(R.id.navigation_view);
+        setToolbar();
+        setStartFragment();
+        setMNavigationItemSelectedListener();
 
+    }
 
-        View navHeaderLayout = navigationView.getHeaderView(R.layout.nav_drawer_header);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        Fragment chooseFragment = new ChooseFragment();
-        final FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.fragment_frame, chooseFragment).commit();
-
-        final Fragment themeListFragment = new ThemeListFragment();
-
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+    public void setMNavigationItemSelectedListener(){
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -75,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                         android.support.v4.app.FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
                         Fragment aFragment = new ThemeListFragment();
                         fragmentTransaction1.replace(R.id.fragment_frame, aFragment);
+                        fragmentTransaction1.addToBackStack(null);
                         fragmentTransaction1.commit();
                         return true;
                     case R.id.nav_geometry_fragment:
@@ -82,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                         android.support.v4.app.FragmentTransaction fragmentTransaction2 = getSupportFragmentManager().beginTransaction();
                         Fragment gFragment = new ThemeListFragment();
                         fragmentTransaction2.replace(R.id.fragment_frame, gFragment);
+                        fragmentTransaction2.addToBackStack(null);
                         fragmentTransaction2.commit();
                         return true;
                     case R.id.yakato_fignya:
@@ -93,4 +89,47 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void setToolbar(){
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void setStartFragment(){
+        Fragment chooseFragment = new ChooseFragment();
+        final FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().add(R.id.fragment_frame, chooseFragment).commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        if(drawerLayout.isDrawerOpen(GravityCompat.START))
+            drawerLayout.closeDrawers();
+        else
+            if(getFragmentManager().getBackStackEntryCount() > 0)
+                getFragmentManager().popBackStackImmediate();
+        else finish();
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // todo: goto back activity from here
+
+                if(drawerLayout.isDrawerOpen(GravityCompat.START))
+                    drawerLayout.closeDrawers();
+                else
+                    getFragmentManager().popBackStackImmediate();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 }
