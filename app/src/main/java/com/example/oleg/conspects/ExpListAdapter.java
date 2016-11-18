@@ -62,10 +62,10 @@ public class ExpListAdapter extends BaseExpandableListAdapter {
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
         if(view == null) {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.list_group_view, null);
+            view = inflater.inflate(R.layout.new_group_view, null);
         }
         //if b == 1 theme is expanded
-        TextView text = (TextView)view.findViewById(R.id.theme_group_text);
+        TextView text = (TextView)view.findViewById(R.id.new_group_text);
         text.setText("Group" + Integer.toString(i));
         return view;
     }
